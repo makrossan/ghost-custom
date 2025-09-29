@@ -1,0 +1,44 @@
+services:
+  ghost:
+    image: ghost:latest
+    container_name: gh-website
+    restart: always
+    ports:
+      - "2368:2368"
+    environment:
+      url: https://ejemplo.nuestrodominio.com
+      NODE_ENV: production
+
+      # Base de datos
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: root
+      database__connection__password: C@mb1@m3
+      database__connection__database: ghost
+
+      mail__transport: SMTP
+      mail__from: "Sitio Web <noreply@dejemplo.nuestrodominio.com>"
+      mail__options__host: smtp.purelymail.com
+      mail__options__port: 587
+      mail__options__secure: "false"
+      mail__options__auth__user: noreply@ejemplo.nuestrodominio.com
+      mail__options__auth__pass: app_password_aqui
+
+    volumes:
+      - ~/ghost/docs/blog:/var/lib/ghost/content
+    depends_on:
+      - db
+      
+  db:
+    image: mariadb:latest
+    container_name: db-website
+    restart: always
+    ports:
+      - "3051:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: C@mb1@m3
+      MYSQL_DATABASE: ghost
+      MYSQL_USER: user
+      MYSQL_PASSWORD: C@mb1@m3
+    volumes:
+      - ~/ghost/docs/mysql-data:/var/lib/mysql

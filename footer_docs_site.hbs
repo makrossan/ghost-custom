@@ -1,0 +1,105 @@
+<!-- Footer legal adaptado a modo oscuro y con fallback -->
+<div id="kv-legal-footer" role="contentinfo" lang="es" aria-label="Pie de página">
+  <nav class="kv-legal-links" aria-label="Enlaces legales">
+    <a href="https://docs.greivinvenegas.com/politica-de-privacidad/" target="_blank" rel="noopener noreferrer">
+      Política de privacidad
+    </a>
+    <span class="sep" aria-hidden="true">•</span>
+    <a href="https://docs.greivinvenegas.com/descargo-de-responsabilidad/" target="_blank" rel="noopener noreferrer">
+      Descargo de responsabilidad
+    </a>
+  </nav>
+  <p class="kv-copy">© <span id="kv-year"></span> Greivin Venegas. Todos los derechos reservados.</p>
+</div>
+
+<style>
+@import url("https://cdn.jsdelivr.net/npm/dochub-font@4.2.1/dochub.min.css");
+
+#kv-legal-footer {
+  font-family: "Dochub", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  margin-top: 2.5rem;
+  padding: 1.25rem 0;
+  text-align: center;
+  color: inherit; /* hereda del tema */
+}
+
+#kv-legal-footer .kv-legal-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 .5rem 0;
+}
+
+#kv-legal-footer .kv-legal-links a {
+  color: inherit;                /* hereda color dinámico */
+  text-decoration: none;
+  border-bottom: 1px dashed currentColor;
+  padding-bottom: 2px;
+  transition: color .2s ease, border-color .2s ease;
+}
+#kv-legal-footer .kv-legal-links a:hover,
+#kv-legal-footer .kv-legal-links a:focus {
+  text-decoration: underline;
+  outline: none;
+}
+
+#kv-legal-footer .sep { opacity: .6; }
+#kv-legal-footer .kv-copy { margin: 0; opacity: .85; font-size: .95rem; }
+
+/* Modo oscuro: asegura contraste */
+@media (prefers-color-scheme: dark) {
+  #kv-legal-footer { border-top-color: rgba(255,255,255,0.12); color: #e0e0e0; }
+  #kv-legal-footer .kv-legal-links a { border-bottom-color: rgba(255,255,255,0.6); }
+}
+</style>
+
+<script>
+(function(){
+  try {
+    // Año dinámico
+    var y = document.getElementById("kv-year");
+    if (y) y.textContent = new Date().getFullYear();
+
+    var footer = document.getElementById("kv-legal-footer");
+
+    function placeFooter() {
+      if (!footer) return false;
+
+      // 1) Si existen comentarios -> insertarlo después
+      var comments = document.querySelector("section.post-full-comments.container");
+      if (comments && comments.parentNode) {
+        comments.parentNode.insertBefore(footer, comments.nextSibling);
+        return true;
+      }
+
+      // 2) Fallback: insertarlo en .inner (alineado al main content)
+      var inner = document.querySelector("#site-main > .container > .inner")
+               || document.querySelector("#site-main .container .inner");
+      if (inner) { inner.appendChild(footer); return true; }
+
+      // 3) Fallback extra
+      var container = document.querySelector("#site-main > .container") || document.querySelector("#site-main");
+      if (container) { container.appendChild(footer); return true; }
+
+      return false;
+    }
+
+    // Intento inmediato
+    var placed = placeFooter();
+
+    // Reintentar si los comentarios se cargan asíncronos
+    if (!placed) {
+      var tries = 0;
+      var obs = new MutationObserver(function(){
+        tries++;
+        if (placeFooter() || tries > 20) { obs.disconnect(); }
+      });
+      obs.observe(document.documentElement, {childList:true, subtree:true});
+      setTimeout(function(){ try{ obs.disconnect(); }catch(e){} }, 3000);
+    }
+  } catch(e) {}
+})();
+</script>
