@@ -1,0 +1,21 @@
+<style>
+  /* Tag page only (body already has .tag-template) */
+  .tag-template .post-list-header .post-full-image {
+    max-width: 100px !important;   /* shrink the figure */
+    margin: 0 auto 1rem !important; /* center it */
+  }
+  .tag-template .post-list-header .post-full-image img.post-featured-image {
+    display: block !important;
+    width: 100px !important;
+    height: 100px !important;
+    object-fit: contain !important; /* no cropping */
+    object-position: center !important;
+    margin: 0 auto !important;
+  }
+
+  /* (Optional) tighten header spacing since the image is small */
+  .tag-template .post-list-header {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+</style>

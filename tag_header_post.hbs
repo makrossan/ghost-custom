@@ -1,0 +1,65 @@
+<style>
+/* ===== DocuHub — Post Featured Image Controls (per-post) =====
+   Scope: single post pages only (body.post-template)
+   Choose ONE preset (A is active by default). Adjust the px values as needed.
+*/
+
+/* Base alignment & cosmetics (applies to all presets) */
+body.post-template .post-full-image { 
+  text-align: center !important;
+  margin: 12px auto 16px !important;
+}
+body.post-template .post-full-image img,
+body.post-template img.post-featured-image {
+  display: block !important;
+  margin: 0 auto !important;
+  border-radius: 0;            /* e.g., 12px for rounded corners */
+  box-shadow: none;            /* e.g., 0 6px 24px rgba(0,0,0,.15) */
+}
+
+/* ===== Preset A (DEFAULT): cap the size (keeps aspect ratio) ===== */
+body.post-template .post-full-image img,
+body.post-template img.post-featured-image {
+  max-width: 480px !important;   /* change me */
+  max-height: 260px !important;  /* change me */
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+/* ===== Preset B: fixed-height hero (full-width with crop/contain) ===== */
+/*
+body.post-template .post-full-image {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 220px !important;       /* change me */
+  overflow: hidden !important;
+}
+body.post-template .post-full-image img,
+body.post-template img.post-featured-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;   /* change to 'contain' to avoid cropping */
+}
+*/
+
+/* ===== Preset C: small square thumbnail (e.g., 100×100) ===== */
+/*
+body.post-template .post-full-image {
+  width: 100px !important;        /* change me */
+  height: 100px !important;       /* change me */
+  margin: 12px auto 12px !important;
+}
+body.post-template .post-full-image img,
+body.post-template img.post-featured-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important; /* or 'cover' for edge-to-edge fill */
+}
+*/
+
+/* ===== Preset D: hide the featured image entirely ===== */
+/*
+body.post-template .post-full-image { display: none !important; }
+*/
+</style>
