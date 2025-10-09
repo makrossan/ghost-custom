@@ -1,21 +1,61 @@
 <style>
-  /* Tag page only (body already has .tag-template) */
   .tag-template .post-list-header .post-full-image {
-    max-width: 100px !important;   /* shrink the figure */
-    margin: 0 auto 1rem !important; /* center it */
+    max-width: 100px !important;
+    margin: 0 auto 1rem !important;
   }
   .tag-template .post-list-header .post-full-image img.post-featured-image {
     display: block !important;
     width: 100px !important;
     height: 100px !important;
-    object-fit: contain !important; /* no cropping */
+    object-fit: contain !important;
     object-position: center !important;
     margin: 0 auto !important;
   }
-
-  /* (Optional) tighten header spacing since the image is small */
   .tag-template .post-list-header {
     padding-top: 0.75rem !important;
     padding-bottom: 0.75rem !important;
+  }
+  body.post-template { --code-max: 82ch; }   /* default */
+  /* body.post-template { --code-max: 72ch; } */  /* classic terminal */
+  /* body.post-template { --code-max: 80ch; } */  /* common width */
+  /* body.post-template { --code-max: 100ch; } */ /* a bit wider */
+  body.post-template pre,
+  body.post-template .kg-code-card pre,
+  body.post-template .gh-content pre,
+  body.post-template .post-full-content pre,
+  body.post-template pre code,
+  body.post-template code[class*="language-"],
+  body.post-template .kg-code-card code {
+    white-space: pre-wrap !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+  body.post-template pre,
+  body.post-template .kg-code-card pre,
+  body.post-template .gh-content pre,
+  body.post-template .post-full-content pre {
+    max-width: var(--code-max) !important;
+    width: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    overflow-x: hidden !important;
+    tab-size: 2;
+  }
+  body.post-template p code,
+  body.post-template li code,
+  body.post-template td code,
+  body.post-template h1 code,
+  body.post-template h2 code,
+  body.post-template h3 code,
+  body.post-template h4 code,
+  body.post-template h5 code,
+  body.post-template h6 code {
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
+  body.post-template .kg-code-card,
+  body.post-template figure.kg-card.kg-code-card {
+    overflow-x: visible !important;
   }
 </style>
