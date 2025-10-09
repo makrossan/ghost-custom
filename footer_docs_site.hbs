@@ -54,6 +54,33 @@
   #kv-legal-footer { border-top-color: rgba(255,255,255,0.12); color: #e0e0e0; }
   #kv-legal-footer .kv-legal-links a { border-bottom-color: rgba(255,255,255,0.6); }
 }
+
+/* ========= Zoom/Lightbox overlay fix ========= */
+/* Keep the zoomed image/overlay above the left menu */
+.medium-zoom-overlay,
+.medium-zoom-image--opened {
+  z-index: 99999 !important;
+}
+
+/* PhotoSwipe (if used) */
+.pswp,
+.pswp__bg,
+.pswp__scroll-wrap {
+  z-index: 99999 !important;
+}
+
+/* basicLightbox (if used) */
+.basicLightbox,
+.basicLightbox__placeholder {
+  z-index: 99999 !important;
+}
+
+/* Optional: while a lightbox is open, stop sidebar from catching clicks */
+html:has(.medium-zoom-overlay) .sidebar,
+html:has(.pswp--open) .sidebar,
+html:has(.basicLightbox--visible) .sidebar {
+  pointer-events: none !important;
+}
 </style>
 
 <script>
